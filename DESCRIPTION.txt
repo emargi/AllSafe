@@ -1,0 +1,2 @@
+Get unique password for every app. No need to remeber all of them.
+No data stored and no internet needed. Use it before every sign-in.
