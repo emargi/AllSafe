@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 
-__version__ = "1.1.3"
+__version__ = "1.1.4"
 
 setup(
     name="AllSafe",
@@ -12,7 +12,7 @@ setup(
     ],
     entry_points={
         "console_scripts": [
-            "allsafe=allsafe.main:main"
+            "allsafe=allsafe.main:run"
         ]
     },
     classifiers=[

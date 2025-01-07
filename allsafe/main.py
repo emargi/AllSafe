@@ -1,7 +1,7 @@
 from allsafe.modules import ConsoleStream, encrypt
 
 
-__version__ = "1.1.3"
+__version__ = "1.1.4"
     
 def handle_inputs(console: ConsoleStream):
     addr_sample = console.styles.gray("(e.g Battle.net)")
@@ -45,10 +45,12 @@ def main():
     
     print_passwds(console, passwds)
 
-
-if __name__ == "__main__":
+def run():
     try:
         main()
     except KeyboardInterrupt:
         exit(0)
 
+
+if __name__ == "__main__":
+    run()
