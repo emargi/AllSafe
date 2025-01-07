@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 
-__version__ = "1.2.6"
+__version__ = "1.2.7"
 
 with open("README.md", 'r') as f:
     long_description = f.read()
@@ -35,4 +35,5 @@ setup(
         "Bug Tracker": "https://github.com/emargi/AllSafe/issues",
     },
     keywords="password password-generator tool allsafe generator",
+    include_package_data=True,
 )
