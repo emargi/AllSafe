@@ -44,6 +44,7 @@
       <a href="#getting-started">Getting Started</a>
       <ul>
         <li><a href="#installation">Installation</a></li>
+        <li><a href="#usage">Usage</a></li>
       </ul>
     </li>
     <li><a href="#contributing">Contributing</a></li>
@@ -60,7 +61,7 @@
 <br />
 This tool will never store any of your data and does *NOT* need an internet connection. so you do not have to worry about your data-safety.
 
-Before any sign in/up in a website/app, you can use this tool to generate a unique and safe password. each time you use this tool with the same given data, you'll get the same password so you don't need to remember the passwords. you just have to remember a secret code for your passwords that you can use only 1 for all of your passwords (it is safe enough but not recommended).
+Before any sign in/up in a website/app, you can use this tool to generate a unique and safe password. each time you use this tool with the same given data, you'll get the same password so you don't need to remember the passwords. you just have to remember a secret code for your passwords. You can use 1 secret code for all of your passwords (it is safe enough but not recommended).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -68,8 +69,7 @@ Before any sign in/up in a website/app, you can use this tool to generate a uniq
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+You need to install python3 in your operating system. then you can use the following easy ways to install and use it.
 
 ### Installation
 
@@ -78,6 +78,13 @@ _It has a pretty straight-forward installation. Use the following command in any
 ```sh
 pip install -U allsafe
 ```
+
+### Usage
+_you just need to run the following command in your command-line, everytime you need the tool_
+```sh
+allsafe
+```
+_the tool will prompt you, so no need to other extra things. Have fun._
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
