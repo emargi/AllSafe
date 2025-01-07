@@ -1,8 +1,8 @@
-from src import ConsoleStream, encrypt
+from allsafe.modules import ConsoleStream, encrypt
 
 
-__version__ = "1.0.0"
-
+__version__ = "1.1.3"
+    
 def handle_inputs(console: ConsoleStream):
     addr_sample = console.styles.gray("(e.g Battle.net)")
     addr = console.ask(f"Enter app address/name {addr_sample}",
@@ -29,9 +29,10 @@ def print_passwds(console: ConsoleStream, passwds: list):
 
 def main():
     console = ConsoleStream()
-    description = ""
-    with open("DESCRIPTION.txt", "r") as f:
-        description = f.read()
+    description = (
+        "Get unique password for every app. No need to remeber all of them.\n"
+        "No data stored and no internet needed. Use it before every sign-in."
+    )
     
     console.panel("[bold]AllSafe[/bold] Modern Password Generator", description, style=console.styles.GRAY)
     console.write(":link: Github: https://github.com/emargi/allsafe")

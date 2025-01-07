@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 
-__version__ = "1.0.0"
+__version__ = "1.1.3"
 
 setup(
     name="AllSafe",
@@ -12,7 +12,7 @@ setup(
     ],
     entry_points={
         "console_scripts": [
-            "allsafe=main:main"
+            "allsafe=allsafe.main:main"
         ]
     },
     classifiers=[
@@ -21,6 +21,6 @@ setup(
         "Operating System :: OS Independent",
     ],
     description="AllSafe, A Modern Password Generator",
-    author="Emargi",
+    author="Mohamad Reza",
     url="https://github.com/emargi/AllSafe",
 )
