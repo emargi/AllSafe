@@ -23,7 +23,7 @@ class Style:
 
 class ConsoleStream:
     def __init__(self) -> None:
-        self.writer = Console(record=True)
+        self.writer = Console()
         self.styles = Style()
 
     def panel(self, title, text, **kwargs):
