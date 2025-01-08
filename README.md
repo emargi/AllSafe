@@ -54,6 +54,8 @@
 
 <img src="./demo.svg"></svg>
 <br />
+<img src="./demo2.svg"></svg>
+<br />
 This tool will never store any of your data and does *NOT* need an internet connection. so you do not have to worry about your data-safety.
 
 Before any sign in/up in a website/app, you can use this tool to generate a unique and safe password. each time you use this tool with the same given data, you'll get the same password so you don't need to remember the passwords. you just have to remember a secret code for your passwords. You can use 1 secret code for all of your passwords (it is safe enough but not recommended).

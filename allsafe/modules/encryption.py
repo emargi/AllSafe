@@ -72,7 +72,8 @@ def encrypt(key, *args):
     
     Default Lengths are 8, 16, 24
     """
-    char_list = sort_chars(*args)
+    extra_strings = (arg.lower() for arg in args)
+    char_list = sort_chars(*extra_strings)
     char_ords = get_ords(char_list)
     key_ords = get_ords(key)
 

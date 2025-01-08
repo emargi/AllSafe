@@ -1,16 +1,14 @@
 from allsafe.modules import ConsoleStream, encrypt
 
 
-__version__ = "1.2.7"
+__version__ = "1.2.9"
     
 def handle_inputs(console: ConsoleStream):
     addr_sample = console.styles.gray("(e.g Battle.net)")
-    addr = console.ask(f"Enter app address/name {addr_sample}",
-                       case_sensitive=False)
+    addr = console.ask(f"Enter app address/name {addr_sample}")
 
     username_sample = console.styles.gray("(e.g user123)")
-    username = console.ask(f"Enter username {username_sample}",
-                           case_sensitive=False)
+    username = console.ask(f"Enter username {username_sample}")
 
     case_note = console.styles.gray("(case-sensitive)")
     note = "(do [bold]NOT[/bold] forget this), " + case_note
