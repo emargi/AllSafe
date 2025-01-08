@@ -21,7 +21,7 @@
     <br />
     <br />
     <a href="https://github.com/emargi/AllSafe/issues/new?labels=bug">Report Bug</a>
-    ·
+    &middot;
     <a href="https://github.com/emargi/AllSafe/issues/new?labels=enhancement">Request Feature</a>
   </p>
 </div>
