@@ -1,7 +1,7 @@
 from allsafe.modules import ConsoleStream, encrypt
 
 
-__version__ = "1.2.9"
+__version__ = "1.2.10"
     
 def handle_inputs(console: ConsoleStream):
     addr_sample = console.styles.gray("(e.g Battle.net)")
