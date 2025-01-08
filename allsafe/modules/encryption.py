@@ -65,7 +65,7 @@ def encrypt(key, *args):
       unicode.
     - The said characters will be hashed with a specific algorithm.
     - The hashed data (which is a big hexadecimal number) will be
-      replaced with a other password-safe characters via a complex
+      replaced with other password-safe characters via a complex
       algorithm.
     - The final string is the result which will always be the same
       with the same given data.
