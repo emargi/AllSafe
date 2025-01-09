@@ -41,7 +41,10 @@ def _convert_hex_to_list_of_ints(hex_string: str, length: int) -> list[int]:
     steps = _get_steps_based_on_length(cipher_len, length)
     for i in range(0, cipher_len, steps):
         nums.append(int(hex_string[i::2], base=16))
-    return nums
+    # `hex_string` might not be divisible by `length`, and
+    # that results in longer nums than the given `length`
+    # this is a compatible option, for now.
+    return nums[:length]
 
 def turn_into_passwd(hex_string: str, length: int) -> str:
     nums = _convert_hex_to_list_of_ints(hex_string, length)
@@ -52,7 +55,7 @@ def turn_into_passwd(hex_string: str, length: int) -> str:
     
     return new_string
 
-def encrypt(key, *args):
+def encrypt(key, *args, **kwargs):
     """
     Encrypt texts with a key as following steps:
     - First, unicode of every single character in texts will be sorted
@@ -70,7 +73,8 @@ def encrypt(key, *args):
     - The final string is the result which will always be the same
       with the same given data.
     
-    Default Lengths are 8, 16, 24
+    you can set password lengths:
+    lengths=(8, 2, 24)
     """
     extra_strings = (arg.lower() for arg in args)
     char_list = sort_chars(*extra_strings)
@@ -82,7 +86,8 @@ def encrypt(key, *args):
     text = "".join(chars)
     hashed_text = calculate_sha256(text)
     passwds = []
-    for num in (8, 16, 24):
-        passwds.append(turn_into_passwd(hashed_text, num))
+    lengths = kwargs.get("lengths", (8, 16, 24))    
+    for length in lengths:
+        passwds.append(turn_into_passwd(hashed_text, length))
     
     return passwds

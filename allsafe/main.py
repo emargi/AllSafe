@@ -1,8 +1,8 @@
 from allsafe.modules import ConsoleStream, encrypt
 
 
-__version__ = "1.2.10"
-    
+__version__ = "1.3.0"
+
 def handle_inputs(console: ConsoleStream):
     addr_sample = console.styles.gray("(e.g Battle.net)")
     addr = console.ask(f"Enter app address/name {addr_sample}")
@@ -14,7 +14,7 @@ def handle_inputs(console: ConsoleStream):
     note = "(do [bold]NOT[/bold] forget this), " + case_note
     secret_key = console.ask(f"Enter secret key {note}")
 
-    return (addr, username, secret_key)
+    return (secret_key, addr, username)
 
 def print_passwds(console: ConsoleStream, passwds: list):
     md_passwds = [console.styles.passwd(i) for i in passwds]
@@ -24,6 +24,18 @@ def print_passwds(console: ConsoleStream, passwds: list):
         f"🔏 16-Length Password:\t{md_passwds[1]}\n"
         f"🔐 24-Length Password:\t{md_passwds[2]}\n"
     )
+
+def generate_custom_password(console: ConsoleStream, *args):
+    length_note = console.styles.gray("(between 1-64)")
+    length = 0
+    while not (length < 65 and length > 0):
+        answer = console.ask(f"Enter the length {length_note}")
+        if answer.isdigit():
+            length = int(answer)
+    
+    passwd_list = encrypt(*args, lengths=(length,))
+    passwd = passwd_list[0]
+    console.write(f"Here you go: {console.styles.passwd(passwd)}")
 
 def main():
     console = ConsoleStream()
@@ -36,12 +48,24 @@ def main():
     console.write(":link: Github: https://github.com/emargi/allsafe")
     console.write(":gear: Version: " + __version__ + "\n")
 
-    addr, username, secret_key = handle_inputs(console)
+    inputs = handle_inputs(console)
     # I don't know if we would ever need statuses
     with console.status("Encrypting..."):
-        passwds = encrypt(secret_key, addr, username)
+        passwds = encrypt(*inputs)
     
     print_passwds(console, passwds)
+    want_custom_passwd = console.ask(
+        "Do you want custom length password?",
+        choices=['y', 'n'],
+        default='n',
+        show_default=False,
+        case_sensitive=False,
+    )
+    if want_custom_passwd == 'n':
+        return
+    
+    generate_custom_password(console, *inputs)
+
 
 def run():
     try:
