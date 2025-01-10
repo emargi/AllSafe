@@ -52,9 +52,9 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-<img src="./demo.svg"></svg>
+<img src="https://raw.githubusercontent.com/emargi/AllSafe/refs/heads/main/demo.svg"></svg>
 <br />
-<img src="./demo2.svg"></svg>
+<img src="https://raw.githubusercontent.com/emargi/AllSafe/refs/heads/main/demo2.svg"></svg>
 <br />
 This tool will never store any of your data and does *NOT* need an internet connection. so you do not have to worry about your data-safety.
 
@@ -69,11 +69,17 @@ Before any sign in/up in a website/app, you can use this tool to generate a uniq
 You need to install python3 in your operating system. then you can use the following easy ways to install and use it.
 
 ### Installation
-
+#### Install Pypi's Build
 _It has a pretty straight-forward installation. Use the following command in any operating system that has python installed._
 
 ```sh
 pip install -U allsafe
+```
+
+#### Don't Trust Pypi's Build?
+_Use the following command to install the tool directly from github._
+```sh
+pip install -U git+https://github.com/emargi/AllSafe
 ```
 
 ### Usage
