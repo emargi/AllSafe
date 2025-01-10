@@ -52,9 +52,9 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-<img src="https://raw.githubusercontent.com/emargi/AllSafe/refs/heads/main/demo.svg"></svg>
+<img src="https://raw.githubusercontent.com/emargi/AllSafe/refs/heads/main/demo1.png"></svg>
 <br />
-<img src="https://raw.githubusercontent.com/emargi/AllSafe/refs/heads/main/demo2.svg"></svg>
+<img src="https://raw.githubusercontent.com/emargi/AllSafe/refs/heads/main/demo2.png"></svg>
 <br />
 This tool will never store any of your data and does *NOT* need an internet connection. so you do not have to worry about your data-safety.
 
