@@ -10,14 +10,16 @@
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
 
+<!-- PROJECT SHIELDS -->
+![PyPI](https://img.shields.io/pypi/v/allsafe)
+
 
 <!-- PROJECT LOGO -->
 <br />
 <div>
-  <h2 align="center">AllSafe</h2>
-
+  <h1 align="center">AllSafe</h2>
   <p align="center">
-    Modern Safe and Unique Password Generator. Do Not Worry About Remebering Your Passwords Anymore. Be Safe Out There.
+    Modern Safe and Unique Password Generator. Do Not Worry About The Passwords Anymore. Be Safe Out There.
     <br />
     <br />
     <a href="https://github.com/emargi/AllSafe/issues/new?labels=bug">Report Bug</a>
