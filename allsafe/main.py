@@ -28,11 +28,11 @@ def print_passwds(console: ConsoleStream, passwds: list):
 def generate_custom_password(console: ConsoleStream, *args):
     length_note = console.styles.gray("(between 1-64)")
     length = 0
-    while not (length < 65 and length > 0):
+    while not 0 < length < 65:
         answer = console.ask(f"Enter the length {length_note}")
         if answer.isdigit():
             length = int(answer)
-    
+
     passwd_list = encrypt(*args, lengths=(length,))
     passwd = passwd_list[0]
     console.write(f"Here you go: {console.styles.passwd(passwd)}")
@@ -43,8 +43,8 @@ def main():
         "Get unique password for every app. No need to remeber all of them.\n"
         "No data stored and no internet needed. Use it before every sign-in."
     )
-    
-    console.panel("[bold]AllSafe[/bold] Modern Password Generator", description, style=console.styles.GRAY)
+    console.panel("[bold]AllSafe[/bold] Modern Password Generator",
+                  description, style=console.styles.GRAY)
     console.write(":link: Github: https://github.com/emargi/allsafe")
     console.write(":gear: Version: " + __version__ + "\n")
 
@@ -52,7 +52,7 @@ def main():
     # I don't know if we would ever need statuses
     with console.status("Encrypting..."):
         passwds = encrypt(*inputs)
-    
+
     print_passwds(console, passwds)
     want_custom_passwd = console.ask(
         "Do you want custom length password?",
@@ -63,7 +63,7 @@ def main():
     )
     if want_custom_passwd == 'n':
         return
-    
+
     generate_custom_password(console, *inputs)
 
 
@@ -71,7 +71,7 @@ def run():
     try:
         main()
     except KeyboardInterrupt:
-        exit(0)
+        pass
 
 
 if __name__ == "__main__":

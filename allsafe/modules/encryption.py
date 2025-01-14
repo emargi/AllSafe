@@ -7,7 +7,7 @@ PASSWORD_CHARACTERS = digits + ascii_letters + punctuation
 def sort_chars(*args) -> list[str]:
     sorted_chars = []
     for arg in args:
-        sorted_chars.extend([i for i in arg])
+        sorted_chars.extend(list(arg))
     sorted_chars.sort()
     return sorted_chars
 
@@ -52,7 +52,6 @@ def turn_into_passwd(hex_string: str, length: int) -> str:
     n_chars = len(PASSWORD_CHARACTERS)
     for num in nums:
         new_string += PASSWORD_CHARACTERS[num%n_chars]
-    
     return new_string
 
 def encrypt(key, *args, **kwargs):
@@ -86,8 +85,8 @@ def encrypt(key, *args, **kwargs):
     text = "".join(chars)
     hashed_text = calculate_sha256(text)
     passwds = []
-    lengths = kwargs.get("lengths", (8, 16, 24))    
+    lengths = kwargs.get("lengths", (8, 16, 24))
     for length in lengths:
         passwds.append(turn_into_passwd(hashed_text, length))
-    
+
     return passwds

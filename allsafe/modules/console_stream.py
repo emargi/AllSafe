@@ -29,7 +29,7 @@ class ConsoleStream:
     def panel(self, title, text, **kwargs):
         panel = Panel.fit(text, title=title, **kwargs)
         self.write(panel, justify="left")
-    
+
     def ask(self, prompt, **kwargs):
         style = kwargs.pop("style", None)
         if style is not None:  # might be needed in the future
@@ -38,10 +38,9 @@ class ConsoleStream:
         while not result:
             result = Prompt.ask(prompt, console=self.writer, **kwargs)
         return result
-    
+
     def write(self, text, **kwargs):
         self.writer.print(text, **kwargs)
-    
+
     def status(self, status, **kwargs):
         return Status(status, console=self.writer, **kwargs)
-    
