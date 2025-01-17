@@ -37,6 +37,8 @@ class ConsoleStream:
         result = ""
         while not result:
             result = Prompt.ask(prompt, console=self.writer, **kwargs)
+            if kwargs.get("default", None) is not None:
+                break
         return result
 
     def write(self, text, **kwargs):

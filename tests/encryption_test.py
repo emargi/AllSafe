@@ -32,5 +32,19 @@ def test_password_lengths():
     test_username = "unknown999"
     test_lengths = [2, 5, 8, 19, 24, 44, 62, 63]
     passwds = encrypt(test_key, test_app, test_username, lengths=test_lengths)
-    for i in range(8):
+    for i in range(len(test_lengths)):
         assert len(passwds[i]) == test_lengths[i]
+
+def test_password_chars():
+    test_key = "test"
+    test_app = "battle.net"
+    test_username = "unknown999"
+    test_lengths = [2, 5, 8, 19, 24, 44, 62, 63]
+    test_chars = "abc123"
+    passwds = encrypt(test_key, test_app, test_username,
+                      lengths=test_lengths, passwd_chars=test_chars)
+    
+    for i in range(len(test_lengths)):
+        assert len(passwds[i]) == test_lengths[i]
+        for char in passwds[i]:
+            assert char in test_chars

@@ -46,12 +46,12 @@ def _convert_hex_to_list_of_ints(hex_string: str, length: int) -> list[int]:
     # this is a compatible option, for now.
     return nums[:length]
 
-def turn_into_passwd(hex_string: str, length: int) -> str:
+def turn_into_passwd(hex_string: str, length: int, passwd_chars: str) -> str:
     nums = _convert_hex_to_list_of_ints(hex_string, length)
     new_string = ""
-    n_chars = len(PASSWORD_CHARACTERS)
+    n_chars = len(passwd_chars)
     for num in nums:
-        new_string += PASSWORD_CHARACTERS[num%n_chars]
+        new_string += passwd_chars[num%n_chars]
     return new_string
 
 def encrypt(key, *args, **kwargs):
@@ -72,8 +72,11 @@ def encrypt(key, *args, **kwargs):
     - The final string is the result which will always be the same
       with the same given data.
     
-    you can set password lengths:
-    lengths=(8, 2, 24)
+    set password lengths:
+    >>> encrypt(key, *info, lengths=(8, 16, 24))
+
+    set password characters:
+    >>> encrypt(key, *info, passwd_chars="abc123")
     """
     extra_strings = (arg.lower() for arg in args)
     char_list = sort_chars(*extra_strings)
@@ -86,7 +89,14 @@ def encrypt(key, *args, **kwargs):
     hashed_text = calculate_sha256(text)
     passwds = []
     lengths = kwargs.get("lengths", (8, 16, 24))
+    passwd_chars = kwargs.get("passwd_chars", PASSWORD_CHARACTERS)
     for length in lengths:
-        passwds.append(turn_into_passwd(hashed_text, length))
+        passwds.append(
+            turn_into_passwd(hashed_text, length, passwd_chars)
+        )
 
     return passwds
+
+def get_unique_and_sorted_chars(chars: str) -> str:
+    """Remove duplicate characters, sort them, and return them."""
+    return "".join(sorted(set(chars)))
