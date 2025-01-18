@@ -1,5 +1,8 @@
 from allsafe.modules import encrypt
-from allsafe.modules.encryption import PASSWORD_CHARACTERS
+from allsafe.modules.encryption import (
+    PASSWORD_CHARACTERS,
+    add_ords,
+)
 
 
 def test_password_generator():
@@ -48,3 +51,15 @@ def test_password_chars():
         assert len(passwds[i]) == test_lengths[i]
         for char in passwds[i]:
             assert char in test_chars
+
+def test_add_ords():
+    ords1 = [1, 2, 3, 4, 5, 6, 7]
+    ords2 = [3, 6, 9]
+
+    new_ords = add_ords(ords1, ords2)
+    expected_ords = [
+        1+3, 2+6, 3+9,
+        4+3, 5+6, 6+9,
+        7+3,
+    ]
+    assert new_ords == expected_ords

@@ -1,5 +1,7 @@
-import hashlib
 from string import ascii_letters, punctuation, digits
+from itertools import cycle
+
+import hashlib
 
 
 PASSWORD_CHARACTERS = digits + ascii_letters + punctuation
@@ -14,17 +16,18 @@ def sort_chars(*args) -> list[str]:
 def get_ords(chars: list) -> list[int]:
     return [ord(char) for char in chars]
 
+def add_ords(ords1: list[int], ords2: list[int]) -> list[int]:
+    """This function will sum numbers of two ord lists, pairwise"""
+    if len(ords1) > len(ords2):
+        larger_ords, shorter_ords = ords1, cycle(ords2)
+    else:
+        larger_ords, shorter_ords = ords2, cycle(ords1)
 
-def add_ords(ords1: list, ords2: list) -> list[int]:
-    n_ords1, n_ords2 = len(ords1), len(ords2)
-    result_ords = []
-    for i in range(max(n_ords1, n_ords2)):
-        result_ords.append(
-            ords1[i%n_ords1] +
-            ords2[i%n_ords2]
-        )
+    result = []
+    for i in larger_ords:
+        result.append(i + next(shorter_ords))
 
-    return result_ords
+    return result
 
 def get_chars(ords: list) -> list[str]:
     return [chr(i) for i in ords]
