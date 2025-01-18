@@ -54,7 +54,15 @@ def turn_into_passwd(hex_string: str, length: int, passwd_chars: str) -> str:
         new_string += passwd_chars[num%n_chars]
     return new_string
 
-def encrypt(key, *args, **kwargs):
+def get_unique_and_sorted_chars(chars: str) -> str:
+    """Remove duplicate characters, sort them, and return the result."""
+    return "".join(sorted(set(chars)))
+
+def encrypt(
+        key: str, *args: str,
+        lengths:tuple[int]=(8, 16, 24,),
+        passwd_chars:str="",
+    ) -> list[str]:
     """
     Encrypt texts with a key as following steps:
     - First, unicode of every single character in texts will be sorted
@@ -87,16 +95,17 @@ def encrypt(key, *args, **kwargs):
     chars = get_chars(new_ords)
     text = "".join(chars)
     hashed_text = calculate_sha256(text)
+    if not passwd_chars:
+        # default characters should not be sorted, at least
+        # in v1, since that will cause incompatibility
+        chars = PASSWORD_CHARACTERS
+    else:
+        chars = get_unique_and_sorted_chars(passwd_chars)
+
     passwds = []
-    lengths = kwargs.get("lengths", (8, 16, 24))
-    passwd_chars = kwargs.get("passwd_chars", PASSWORD_CHARACTERS)
     for length in lengths:
         passwds.append(
-            turn_into_passwd(hashed_text, length, passwd_chars)
+            turn_into_passwd(hashed_text, length, chars)
         )
 
     return passwds
-
-def get_unique_and_sorted_chars(chars: str) -> str:
-    """Remove duplicate characters, sort them, and return them."""
-    return "".join(sorted(set(chars)))

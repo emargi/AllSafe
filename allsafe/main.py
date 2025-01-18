@@ -1,4 +1,4 @@
-from allsafe.modules import ConsoleStream, encrypt, get_unique_and_sorted_chars
+from allsafe.modules import ConsoleStream, encrypt
 
 
 __version__ = "1.4.0"
@@ -26,24 +26,18 @@ def print_passwds(console: ConsoleStream, passwds: list):
     )
 
 def generate_custom_password(console: ConsoleStream, *args):
-    kwargs = {}
     length_note = console.styles.gray("(between 1-64)")
     length = 0
     while not 0 < length < 65:
         answer = console.ask(f"Enter the length {length_note}")
         if answer.isdigit():
             length = int(answer)
-    kwargs["lengths"] = (length,)
 
     chars_note = console.styles.gray("(enter for default)")
     chars = console.ask(f"Enter password characters {chars_note}",
                         default="", show_default=False)
-    # I don't want PASSWORD_CHARACTERS to be sorted, since that
-    # will cause incompatiblity with the previous versions
-    if chars:
-        kwargs["passwd_chars"] = get_unique_and_sorted_chars(chars)
 
-    passwd_list = encrypt(*args, **kwargs)
+    passwd_list = encrypt(*args, lengths=(length,), passwd_chars=chars)
     passwd = passwd_list[0]
     console.write(f"✅ Here you go: {console.styles.passwd(passwd)}")
 
