@@ -39,7 +39,7 @@ def generate_custom_password(console: ConsoleStream, *args):
 
     passwd_list = encrypt(*args, lengths=(length,), passwd_chars=chars)
     passwd = passwd_list[0]
-    console.write(f"✅ Here you go: {console.styles.passwd(passwd)}")
+    console.write(f"\n✅ Here you go: {console.styles.passwd(passwd)}")
 
 def main():
     console = ConsoleStream()
