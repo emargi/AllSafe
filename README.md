@@ -38,13 +38,10 @@
       <a href="#about-the-project">About The Project</a>
     </li>
     <li>
-      <a href="#getting-started">Getting Started</a>
+      <a href="#installation">Installation</a>
       <ul>
-        <li><a href="#installation">Installation</a></li>
-        <ul>
-          <li><a href="#linux">Linux</a></li>
-          <li><a href="#windows">Windows</a></li>
-        </ul>
+        <li><a href="#linux">Linux</a></li>
+        <li><a href="#windows">Windows</a></li>
       </ul>
     </li>
     <li><a href="#contributing">Contributing</a></li>
@@ -68,12 +65,9 @@ Before any sign in/up in a website/app, you can use this tool to generate a uniq
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
-<!-- GETTING STARTED -->
-## Getting Started
-You will need to have python3 and pip3 installed on your operating system, first.
-
-### Installation
-#### Linux
+<!-- INSTALLATION -->
+## Installation
+### Linux
 1. **Install `pipx`:**
   Use the package manager of your wish on your OS (e.g. apt)
   ```sh
@@ -90,7 +84,7 @@ You will need to have python3 and pip3 installed on your operating system, first
   pipx install git+https://github.com/emargi/allsafe
   ```
 
-#### Windows
+### Windows
 First, make sure you have python and pip installed on your system.
 - Trust PyPi's Build?
   ```sh
