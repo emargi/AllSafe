@@ -7,7 +7,7 @@ from rich.panel import Panel
 class Style:
     RED = "#cc3333"
     GREEN = "#00a693"
-    GRAY = "#495057"
+    GRAY = "#6c757d"
     PASSWD = f"bold {GREEN}"
 
     def __getattr__(self, name):
