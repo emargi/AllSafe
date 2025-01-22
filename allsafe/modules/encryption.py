@@ -41,7 +41,7 @@ def _get_steps_based_on_length(cipher_len, passwd_len) -> int:
 def _convert_hex_to_list_of_ints(hex_string: str, length: int) -> list[int]:
     """
     This function will take a hexadecimal number (`hex_string`) that will be used to generate
-    numbers as much as specified in `length` (length of the result list) parameter.
+    numbers as many as specified in `length` (length of the result list) parameter.
     """
     nums = []
     cipher_len = len(hex_string)

@@ -41,7 +41,10 @@
       <a href="#getting-started">Getting Started</a>
       <ul>
         <li><a href="#installation">Installation</a></li>
-        <li><a href="#usage">Usage</a></li>
+        <ul>
+          <li><a href="#linux">Linux</a></li>
+          <li><a href="#windows">Windows</a></li>
+        </ul>
       </ul>
     </li>
     <li><a href="#contributing">Contributing</a></li>
@@ -60,36 +63,43 @@
 <br />
 This tool will never store any of your data and does *NOT* need an internet connection. so you do not have to worry about your data-safety.
 
-Before any sign in/up in a website/app, you can use this tool to generate a unique and safe password. each time you use this tool with the same given data, you'll get the same password so you don't need to remember the passwords. you just have to remember a secret code for your passwords. You can use 1 secret code for all of your passwords (it is safe enough but not recommended).
+Before any sign in/up in a website/app, you can use this tool to generate a unique and safe password. each time you use this tool with the same given data, you'll get the same password so you don't need to remember the passwords. you just have to remember a secret code for your passwords. You can use a single secret code for all of your passwords (it is safe enough but not recommended).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 <!-- GETTING STARTED -->
 ## Getting Started
-
-You need to install python3 in your operating system. then you can use the following easy ways to install and use it.
+You will need to have python3 and pip3 installed on your operating system, first.
 
 ### Installation
-#### Install Pypi's Build
-_It has a pretty straight-forward installation. Use the following command in any operating system that has python installed._
+#### Linux
+1. **Install `pipx`:**
+  Use the package manager of your wish on your OS (e.g. apt)
+  ```sh
+  sudo apt install pipx
+  pipx ensurepath
+  ```
+2. **Install `AllSafe`:**
+  - Trust PyPi's Build?
+  ```sh
+  pipx install allsafe
+  ```
+  - Not Trust PyPi's Build?
+  ```sh
+  pipx install git+https://github.com/emargi/allsafe
+  ```
 
-```sh
-pip install -U allsafe
-```
-
-#### Don't Trust Pypi's Build?
-_Use the following command to install the tool directly from github._
-```sh
-pip install -U git+https://github.com/emargi/AllSafe
-```
-
-### Usage
-_you just need to run the following command in your command-line, everytime you need the tool_
-```sh
-allsafe
-```
-_the tool will prompt you, so no need to other extra things. Have fun._
+#### Windows
+First, make sure you have python and pip installed on your system.
+- Trust PyPi's Build?
+  ```sh
+  pip install allsafe
+  ```
+- Not Trust PyPi's Build?
+  ```sh
+  pip install git+https://github.com/emargi/allsafe
+  ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
