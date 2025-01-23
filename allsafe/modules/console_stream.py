@@ -5,6 +5,7 @@ from rich.panel import Panel
 
 
 class Style:
+    """This class will handle colors and their markdown"""
     RED = "#cc3333"
     GREEN = "#00a693"
     GRAY = "#6c757d"
@@ -22,6 +23,7 @@ class Style:
 
 
 class ConsoleStream:
+    """This class will handle the console outputs"""
     def __init__(self) -> None:
         self.writer = Console()
         self.styles = Style()

@@ -7,6 +7,10 @@ import hashlib
 PASSWORD_CHARACTERS = digits + ascii_letters + punctuation
 
 def sort_chars(*args) -> list[str]:
+    """
+    insert every character in the given texts into a list
+    and sort the list
+    """
     sorted_chars = []
     for arg in args:
         sorted_chars.extend(list(arg))
@@ -16,16 +20,19 @@ def sort_chars(*args) -> list[str]:
 def get_ords(chars: list) -> list[int]:
     return [ord(char) for char in chars]
 
+def _get_larger_and_shorter_list(list1: list, list2: list) -> tuple[list]:
+    if len(list1) > len(list2):
+        return (list1, list2)
+    
+    return (list2, list1)
+
 def add_ords(ords1: list[int], ords2: list[int]) -> list[int]:
     """This function will sum numbers of two ord lists, pairwise"""
-    if len(ords1) > len(ords2):
-        larger_ords, shorter_ords = ords1, cycle(ords2)
-    else:
-        larger_ords, shorter_ords = ords2, cycle(ords1)
-
+    larger, shorter = _get_larger_and_shorter_list(ords1, ords2)
+    shorter_cycle = cycle(shorter)
     result = []
-    for i in larger_ords:
-        result.append(i + next(shorter_ords))
+    for i in larger:
+        result.append(i + next(shorter_cycle))
 
     return result
 
