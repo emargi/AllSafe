@@ -44,6 +44,7 @@ class ConsoleStream:
         return result
 
     def write(self, text, **kwargs):
+        """Write the given styled text to the console"""
         self.writer.print(text, **kwargs)
 
     def status(self, status, **kwargs):

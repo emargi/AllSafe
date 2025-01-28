@@ -54,10 +54,11 @@ def main():
 
     inputs = handle_inputs(console)
     # I don't know if we would ever need statuses
+    # since the process is fast enough
     with console.status("Encrypting..."):
         passwds = encrypt(*inputs)
-
     print_passwds(console, passwds)
+
     want_custom_passwd = console.ask(
         "Do you want custom length password?",
         choices=['y', 'n'],
@@ -67,7 +68,6 @@ def main():
     )
     if want_custom_passwd == 'n':
         return
-
     generate_custom_password(console, *inputs)
 
 

@@ -23,7 +23,6 @@ def get_ords(chars: list) -> list[int]:
 def _get_larger_and_shorter_list(list1: list, list2: list) -> tuple[list]:
     if len(list1) > len(list2):
         return (list1, list2)
-    
     return (list2, list1)
 
 def add_ords(ords1: list[int], ords2: list[int]) -> list[int]:
@@ -61,6 +60,9 @@ def _convert_hex_to_list_of_ints(hex_string: str, length: int) -> list[int]:
     return nums[:length]
 
 def turn_into_passwd(hex_string: str, length: int, passwd_chars: str) -> str:
+    """
+    Turn `hex_string` into a password with the given length and passwd_chars characters
+    """
     nums = _convert_hex_to_list_of_ints(hex_string, length)
     new_string = ""
     n_chars = len(passwd_chars)
@@ -93,7 +95,7 @@ def encrypt(
       algorithm.
     - The final string is the result which will always be the same
       with the same given data.
-    
+
     set password lengths:
     >>> encrypt(key, *info, lengths=(8, 16, 24))
 
