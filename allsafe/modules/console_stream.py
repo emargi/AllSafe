@@ -1,6 +1,5 @@
 from rich.console import Console
 from rich.prompt import Prompt
-from rich.status import Status
 from rich.panel import Panel
 
 
@@ -46,6 +45,3 @@ class ConsoleStream:
     def write(self, text, **kwargs):
         """Write the given styled text to the console"""
         self.writer.print(text, **kwargs)
-
-    def status(self, status, **kwargs):
-        return Status(status, console=self.writer, **kwargs)

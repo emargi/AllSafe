@@ -1,7 +1,7 @@
 from allsafe.modules import ConsoleStream, encrypt
 
 
-__version__ = "1.4.3"
+__version__ = "1.4.4"
 
 def handle_inputs(console: ConsoleStream):
     addr_sample = console.styles.gray("(e.g Battle.net)")
@@ -53,10 +53,7 @@ def main():
     console.write(":gear: Version: " + __version__ + "\n")
 
     inputs = handle_inputs(console)
-    # I don't know if we would ever need statuses
-    # since the process is fast enough
-    with console.status("Encrypting..."):
-        passwds = encrypt(*inputs)
+    passwds = encrypt(*inputs)
     print_passwds(console, passwds)
 
     want_custom_passwd = console.ask(
