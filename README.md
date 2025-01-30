@@ -51,7 +51,7 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-[![asciicast](https://asciinema.org/a/iXoiYA2KWXZ5JEWcvWce82yQ8.svg)](https://asciinema.org/a/iXoiYA2KWXZ5JEWcvWce82yQ8)
+[![asciicast](https://asciinema.org/a/700512.svg)](https://asciinema.org/a/700512)
 
 This tool will never store any of your data and does *NOT* need an internet connection. so you do not have to worry about your data-safety.
 
