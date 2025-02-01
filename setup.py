@@ -6,13 +6,14 @@ __version__ = "1.4.4"
 with open("README.md", 'r', encoding="utf-8") as f:
     long_description = f.read()
 
+with open("requirements.txt", 'r', encoding="utf-8") as f:
+    required_packages = [l.strip() for l in f.readlines()]
+
 setup(
     name="AllSafe",
     version=__version__,
     packages=find_packages(),
-    install_requires=[
-        "rich",
-    ],
+    install_requires=required_packages,
     entry_points={
         "console_scripts": [
             "allsafe=allsafe.main:run"
