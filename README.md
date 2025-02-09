@@ -1,17 +1,8 @@
-<!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
 <a id="readme-top"></a>
 
 <!-- PROJECT SHIELDS -->
-<!--
-*** I'm using markdown "reference style" links for readability.
-*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
-*** See the bottom of this document for the declaration of the reference variables
-*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
-*** https://www.markdownguide.org/basic-syntax/#reference-style-links
--->
-
-<!-- PROJECT SHIELDS -->
 ![PyPI](https://img.shields.io/pypi/v/allsafe)
+
 <!-- PROJECT LOGO -->
 <br />
 <div>
@@ -25,7 +16,6 @@
     <a href="https://github.com/emargi/AllSafe/issues/new?labels=enhancement">Request Feature</a>
   </p>
 </div>
-
 
 
 <!-- TABLE OF CONTENTS -->
@@ -54,12 +44,27 @@
 ## About The Project
 [![asciicast](https://asciinema.org/a/700512.svg)](https://asciinema.org/a/700512)
 
-This tool will never store any of your data and does *NOT* need an internet connection. so you do not have to worry about your data-safety.
 
-Before any sign in/up in a website/app, you can use this tool to generate a unique and safe password. each time you use this tool with the same given data, you'll get the same password so you don't need to remember the passwords. you just have to remember a secret code for your passwords. You can use a single secret code for all of your passwords (it is safe enough but not recommended).
+> [!NOTE]
+> This tool will never store any of your data and does *NOT* need an internet connection. so you do not have to worry about your data-safety.
+
+> AllSafe is a terminal tool to generate unique password for each application or website you want to sign up in.
+
+AllSafe will give you a unique password for every app based on the given info, so everytime you pass the same info, you will get the same password
+
+### Why do we need unique passwords?
+with having a unique password for each website, you will not need to worry about other passwords in case one of the websites has a security breach or your password gets leaked somehow.
+
+### How do we not forget the passwords?
+You don't, you just have to memorize your secret codes (safe enough to use one for all passwords). with the same secret code and the same data, you will get the same password. so no need to worry about storing or memorizing your passwords.
+
+### How does the algorithm work?
+Your secret code will turn your data into some weird characters. the weird characters are encrypted into a hash. the algorithm gets rid of some keys in the hash. the incomplete hash is seperated into small parts based on the length. each small part will be converted into a decimal number. each decimal number is divided by the length of the password characters, and a character will be chosen for the password based on the remainder.
+
+### If my password gets exposed, will my secret code be revealed?
+No, even if they find a way to guess the hash, they will have the incomplete hash. although the complete hash is based on some weird characters.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 <!-- INSTALLATION -->
 ## Installation
