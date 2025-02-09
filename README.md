@@ -44,6 +44,7 @@
     </li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
+    <li><a href="#credits">Credits</a></li>
   </ol>
 </details>
 
@@ -114,3 +115,8 @@ Don't forget to give the project a star! Thanks again!
 Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+<!-- Credits -->
+## Credits
+- This README file is based on [Best-README-Template](https://github.com/othneildrew/Best-README-Template)
