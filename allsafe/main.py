@@ -1,7 +1,7 @@
-from allsafe.modules import ConsoleStream, encrypt
+from allsafe.modules import ConsoleStream, generate_passwd, utils
 
 
-__version__ = "1.4.4"
+__version__ = "1.4.5"
 
 def handle_inputs(console: ConsoleStream):
     addr_sample = console.styles.gray("(e.g Battle.net)")
@@ -26,18 +26,15 @@ def print_passwds(console: ConsoleStream, passwds: list):
     )
 
 def generate_custom_password(console: ConsoleStream, *args):
-    length_note = console.styles.gray("(between 1-64)")
-    length = 0
-    while not 0 < length < 65:
-        answer = console.ask(f"Enter the length {length_note}")
-        if answer.isdigit():
-            length = int(answer)
+    length_note = console.styles.gray("(between 4-64)")
+    length = console.ask(f"Enter the length {length_note}",
+                         func=utils.passwd_length_filter)
 
     chars_note = console.styles.gray("(enter for default)")
     chars = console.ask(f"Enter password characters {chars_note}",
-                        default="", show_default=False)
+                        func=utils.passwd_chars_filter)
 
-    passwd_list = encrypt(*args, lengths=(length,), passwd_chars=chars)
+    passwd_list = generate_passwd(*args, lengths=(length,), passwd_chars=chars)
     passwd = passwd_list[0]
     console.write(f"\n✅ Here you go: {console.styles.passwd(passwd)}")
 
@@ -53,7 +50,12 @@ def main():
     console.write(":gear: Version: " + __version__ + "\n")
 
     inputs = handle_inputs(console)
-    passwds = encrypt(*inputs)
+    # default keyword arguments
+    kwargs = {
+        "lengths": (8, 16, 24),
+        "passwd_chars": utils.PASSWORD_CHARACTERS,
+    }
+    passwds = generate_passwd(*inputs, **kwargs)
     print_passwds(console, passwds)
 
     want_custom_passwd = console.ask(

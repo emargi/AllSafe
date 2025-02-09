@@ -2,12 +2,15 @@
     Test functions defined in allsafe/modules/encryption.py
 """
 
-from allsafe.modules import encrypt
-from allsafe.modules.encryption import (
-    PASSWORD_CHARACTERS,
-    add_ords,
-)
+from allsafe.modules import generate_passwd
+from allsafe.modules.encryption import add_ords
+from allsafe.modules.utils import PASSWORD_CHARACTERS
 
+
+default_kwargs = {
+    "lengths": (8, 16, 24),
+    "passwd_chars": PASSWORD_CHARACTERS,
+}
 
 def test_password_generator():
     """Test the functionality"""
@@ -15,7 +18,7 @@ def test_password_generator():
     test_app = "Battle.net"
     test_username = "unknown999"
 
-    passwds = encrypt(test_key, test_app, test_username)
+    passwds = generate_passwd(test_key, test_app, test_username, **default_kwargs)
     for passwd in passwds:
         assert isinstance(passwd, str)
         for char in passwd:
@@ -33,9 +36,10 @@ def test_if_passwords_are_the_same():
     test_username = "unknown999"
 
     args = (test_app, test_username)
-    passwds1 = encrypt(test_key, *args)
+    passwds1 = generate_passwd(test_key, *args, **default_kwargs)
 
-    passwds2 = encrypt(test_key, *(i.upper() for i in args))
+    passwds2 = generate_passwd(test_key, *(i.upper() for i in args),
+                               **default_kwargs)
 
     assert passwds1 == passwds2
 
@@ -47,7 +51,11 @@ def test_password_lengths():
     test_app = "battle.net"
     test_username = "unknown999"
     test_lengths = [2, 5, 8, 19, 24, 44, 62, 63]
-    passwds = encrypt(test_key, test_app, test_username, lengths=test_lengths)
+    passwds = generate_passwd(
+        test_key, test_app, test_username,
+        lengths=test_lengths,
+        passwd_chars=PASSWORD_CHARACTERS
+    )
     for index, passwd in enumerate(passwds):
         assert len(passwd) == test_lengths[index]
 
@@ -60,9 +68,10 @@ def test_password_chars():
     test_username = "unknown999"
     test_lengths = [2, 5, 8, 19, 24, 44, 62, 63]
     test_chars = "abc123"
-    passwds = encrypt(test_key, test_app, test_username,
-                      lengths=test_lengths, passwd_chars=test_chars)
-
+    passwds = generate_passwd(
+        test_key, test_app, test_username,
+        lengths=test_lengths, passwd_chars=test_chars
+    )
     for index, passwd in enumerate(passwds):
         assert len(passwd) == test_lengths[index]
         for char in passwd:

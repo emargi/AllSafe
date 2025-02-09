@@ -32,16 +32,26 @@ class ConsoleStream:
         self.write(panel, justify="left")
 
     def ask(self, prompt, **kwargs):
+        func = kwargs.pop("func", None)
         style = kwargs.pop("style", None)
         if style is not None:  # might be needed in the future
             prompt = self.styles.get_md(style, prompt)
-        result = ""
-        while not result:
-            result = Prompt.ask(prompt, console=self.writer, **kwargs)
-            if kwargs.get("default", None) is not None:
-                break
-        return result
+        input_string = ""
+        while not input_string:
+            input_string = Prompt.ask(prompt, console=self.writer, **kwargs)
+            if callable(func):
+                try:
+                    result = func(input_string)
+                    return result
+                except ValueError as e:
+                    self.error(e)
+                    input_string = ""
+        return input_string
 
     def write(self, text, **kwargs):
         """Write the given styled text to the console"""
         self.writer.print(text, **kwargs)
+
+    def error(self, text):
+        """Write the given text in error style to the console"""
+        self.write(text, style=self.styles.RED)
