@@ -67,7 +67,7 @@ def turn_into_passwd(hex_string: str, length: int, passwd_chars: str) -> str:
         new_string += passwd_chars[num%n_chars]
     return new_string
 
-def generate_passwd(key: str, *args, lengths: tuple[int], passwd_chars: str) -> list[str]:
+def generate_passwds(key: str, *args, lengths: tuple[int], passwd_chars: str) -> list[str]:
     """
     Encrypt texts with a key as following steps:
     - First, unicode of every single character in texts will be sorted
