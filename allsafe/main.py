@@ -1,8 +1,24 @@
-from allsafe.modules import ConsoleStream, generate_passwd, utils
+import sys
+import argparse
+
+from allsafe.modules import ConsoleStream, generate_passwds, utils
 
 
-__version__ = "1.4.5"
+__version__ = "1.5.0"
 
+def print_passwds(console: ConsoleStream , passwds: list):
+    for passwd in passwds:
+        length = len(passwd)
+        emoji = utils.get_meaningful_emoji(passwd, length)
+        # markdown representation
+        md_passwd = console.styles.passwd(passwd)
+        console.write(
+            f"{emoji} {length}-Length Password:\t{md_passwd}"
+        )
+
+# ---------------------------
+# Interactive mode functions
+# ---------------------------
 def handle_inputs(console: ConsoleStream):
     addr_sample = console.styles.gray("(e.g Battle.net)")
     addr = console.ask(f"Enter app address/name {addr_sample}")
@@ -16,16 +32,7 @@ def handle_inputs(console: ConsoleStream):
 
     return (secret_key, addr, username)
 
-def print_passwds(console: ConsoleStream, passwds: list):
-    md_passwds = [console.styles.passwd(i) for i in passwds]
-    console.write(
-        "\n"
-        f"🔒 8-Length Password:\t{md_passwds[0]}\n"
-        f"🔏 16-Length Password:\t{md_passwds[1]}\n"
-        f"🔐 24-Length Password:\t{md_passwds[2]}\n"
-    )
-
-def generate_custom_password(console: ConsoleStream, *args):
+def handle_custom_inputs(console: ConsoleStream):
     length_note = console.styles.gray("(between 4-64)")
     length = console.ask(f"Enter the length {length_note}",
                          func=utils.passwd_length_filter)
@@ -34,12 +41,9 @@ def generate_custom_password(console: ConsoleStream, *args):
     chars = console.ask(f"Enter password characters {chars_note}",
                         func=utils.passwd_chars_filter)
 
-    passwd_list = generate_passwd(*args, lengths=(length,), passwd_chars=chars)
-    passwd = passwd_list[0]
-    console.write(f"\n✅ Here you go: {console.styles.passwd(passwd)}")
+    return (length, chars)
 
-def main():
-    console = ConsoleStream()
+def run_interactive_mode(console: ConsoleStream):
     description = (
         "Get unique password for every app. No need to remeber all of them.\n"
         "No data stored and no internet needed. Use it before every sign-in."
@@ -49,33 +53,101 @@ def main():
     console.write(":link: Github: https://github.com/emargi/allsafe")
     console.write(":gear: Version: " + __version__ + "\n")
 
-    inputs = handle_inputs(console)
-    # default keyword arguments
+    args = handle_inputs(console)
     kwargs = {
-        "lengths": (8, 16, 24),
-        "passwd_chars": utils.PASSWORD_CHARACTERS,
+        "lengths": utils.PASSWORD_LENGTHS,
+        "passwd_chars": utils.PASSWORD_CHARACTERS
     }
-    passwds = generate_passwd(*inputs, **kwargs)
+    passwds = generate_passwds(*args, **kwargs)
     print_passwds(console, passwds)
 
     want_custom_passwd = console.ask(
-        "Do you want custom length password?",
-        choices=['y', 'n'],
-        default='n',
+        "Do you want a custom password?",
+        choices=["y", "n"],
+        default="n",
         show_default=False,
         case_sensitive=False,
     )
-    if want_custom_passwd == 'n':
+    if want_custom_passwd == "n":
         return
-    generate_custom_password(console, *inputs)
 
+    length, chars = handle_custom_inputs(console)
+    passwds = generate_passwds(*args, lengths=(length,), passwd_chars=chars)
+    print_passwds(console, passwds)
 
-def run():
-    try:
-        main()
-    except KeyboardInterrupt:
-        pass
+# -----------------------------
+# Non-Interactive mode functions
+# -----------------------------
+def parse_args(argv):
+    usage = (
+        "allsafe [-h] [-i] -a APP -u USERNAME -s SECRET "
+        "[-l LENGTH] [-c CHARACTERS]"
+    )
+    parser = argparse.ArgumentParser(
+        "AllSafe", usage,
+    )
+    # arguments
+    parser.add_argument(
+        "-i", "--interactive", type=bool, required=False,
+        help="enter interactive mode",
+    )
+    parser.add_argument(
+        "-a", "--app", type=str, required=True,
+        help="Application name or url",
+    )
+    parser.add_argument(
+        "-u", "--username", type=str, required=True,
+        help="Your username or something unique to you",
+    )
+    parser.add_argument(
+        "-s", "--secret", type=str, required=True,
+        help="Your secret key to this password (case-sensitive)",
+    )
+    parser.add_argument(
+        "-l", "--length", type=int, required=False,
+        help="Password length, (default: 8, 16, 24)",
+    )
+    parser.add_argument(
+        "-c", "--characters", type=str, required=False,
+        help="Password characters",
+    )
+
+    return parser.parse_args(argv)
+
+def run_non_interactive_mode(console: ConsoleStream, args):
+    secret = args.secret
+    app = args.app.lower()
+    username = args.username.lower()
+    chars = utils.passwd_chars_filter(args.characters)
+    if args.length:
+        length = utils.passwd_length_filter(args.length)
+        lengths = (length,)
+    else:
+        lengths = utils.PASSWORD_LENGTHS
+
+    passwds = generate_passwds(
+        secret, app, username,
+        lengths=lengths,
+        passwd_chars=chars,
+    )
+    print_passwds(console, passwds)
+
+# --------------
+# main function
+# --------------
+def main():
+    console = ConsoleStream()
+    argv = sys.argv[1:]
+    if len(argv) == 0 or "-i" in argv:
+        try:
+            run_interactive_mode(console)
+        except KeyboardInterrupt:
+            pass
+        return
+
+    args = parse_args(argv)
+    run_non_interactive_mode(console, args)
 
 
 if __name__ == "__main__":
-    run()
+    main()

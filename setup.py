@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 
-__version__ = "1.4.5"
+__version__ = "1.5.0"
 
 with open("README.md", 'r', encoding="utf-8") as f:
     long_description = f.read()
@@ -16,7 +16,7 @@ setup(
     install_requires=required_packages,
     entry_points={
         "console_scripts": [
-            "allsafe=allsafe.main:run"
+            "allsafe=allsafe.main:main"
         ]
     },
     classifiers=[
