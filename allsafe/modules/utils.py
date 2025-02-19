@@ -1,7 +1,6 @@
 from string import (
     digits, ascii_letters, punctuation
 )
-from math import log2
 from typing import Union
 
 
