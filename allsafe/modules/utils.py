@@ -1,6 +1,7 @@
 from string import (
     digits, ascii_letters, punctuation
 )
+from typing import Union
 
 
 PASSWORD_CHARACTERS = digits + ascii_letters + punctuation
@@ -22,7 +23,7 @@ def passwd_chars_filter(chars: str):
         raise ValueError("chars must have at least 4 unique characters")
     return new_chars
 
-def passwd_length_filter(length: str | int):
+def passwd_length_filter(length: Union[str, int]):
     if isinstance(length, str):
         if not length.isdigit():
             raise ValueError("length should contain only digits")
