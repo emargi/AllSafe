@@ -1,6 +1,7 @@
 from string import (
     digits, ascii_letters, punctuation
 )
+from math import log2
 from typing import Union
 
 
@@ -33,18 +34,30 @@ def passwd_length_filter(length: Union[str, int]):
         raise ValueError("length must be between 4-64")
     return length
 
-def get_meaningful_emoji(passwd: str, passwd_len: int):
-    # this is simple and temporary
-    # TODO: update this function
-    if passwd_len < 8:
+def get_passwd_score(passwd: str, passwd_len: int):
+    # classic password score system
+    score = 0
+
+    # character variety
+    if any(c.islower() for c in passwd):
+        score += 1
+    if any(c.isupper() for c in passwd):
+        score += 1
+    if any(c.isdigit() for c in passwd):
+        score += 1
+    if any(c in punctuation for c in passwd):
+        score += 1
+
+    # length
+    score += (passwd_len-8) // 2
+
+    return score
+
+def get_meaningful_emoji(passwd_score: int):
+    if passwd_score < 4:
         return "🔓"
-    if passwd_len > 21:
-        return "🔐"
-
-    used_chars = set(passwd)
-    chars_count = len(used_chars)
-
-    if chars_count < passwd_len:
+    if passwd_score < 8:
         return "🔒"
-    # short yet strong password
-    return "🔏"
+    if passwd_score < 12:
+        return "🔏"
+    return "🔐"

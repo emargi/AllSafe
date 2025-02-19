@@ -6,10 +6,11 @@ from allsafe.modules import ConsoleStream, generate_passwds, utils
 
 __version__ = "1.5.0"
 
-def print_passwds(console: ConsoleStream , passwds: list):
+def print_passwds(console: ConsoleStream, passwds: list):
     for passwd in passwds:
         length = len(passwd)
-        emoji = utils.get_meaningful_emoji(passwd, length)
+        score = utils.get_passwd_score(passwd, length)
+        emoji = utils.get_meaningful_emoji(score)
         # markdown representation
         md_passwd = console.styles.passwd(passwd)
         console.write(
