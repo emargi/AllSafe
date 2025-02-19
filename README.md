@@ -42,7 +42,7 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-[![asciicast](https://asciinema.org/a/700512.svg)](https://asciinema.org/a/700512)
+[![asciicast](https://asciinema.org/a/704458.svg)](https://asciinema.org/a/704458)
 
 
 > [!NOTE]
@@ -98,6 +98,29 @@ First, make sure you have python and pip installed on your system.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+
+<!-- USAGE -->
+## Usage
+
+### Interactive Mode
+Run:
+```sh
+allsafe
+```
+or alternatively:
+```sh
+allsafe -i
+```
+
+### Commandline Arguments
+required arguments:
+```sh
+allsafe -a APP -u USERNAME -s SECRET
+```
+see full help:
+```sh
+allsafe -h
+```
 
 <!-- CONTRIBUTING -->
 ## Contributing
