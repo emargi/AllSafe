@@ -21,14 +21,14 @@ def test_passwd_chars_filter():
     except ValueError:
         pass
     else:
-        raise Exception
+        raise AssertionError
 
     try:
         passwd_chars_filter(test_chars4)
     except ValueError:
         pass
     else:
-        raise Exception
+        raise AssertionError
 
 def test_passwd_length_filter():
     test_length1 = "5"
@@ -41,14 +41,14 @@ def test_passwd_length_filter():
     except ValueError:
         pass
     else:
-        raise Exception
+        raise AssertionError
 
     try:
         passwd_length_filter(test_length3)
     except ValueError:
         pass
     else:
-        raise Exception
+        raise AssertionError
 
 def test_passwd_score():
     passwd1 = "abc123"

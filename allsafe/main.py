@@ -147,7 +147,10 @@ def main():
         return
 
     args = parse_args(argv)
-    run_non_interactive_mode(console, args)
+    try:
+        run_non_interactive_mode(console, args)
+    except ValueError as e:
+        console.error(e)
 
 
 if __name__ == "__main__":
