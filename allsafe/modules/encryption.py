@@ -41,18 +41,15 @@ def calculate_sha256(text: str) -> str:
     """Calculate the SHA-256 hash of the given text"""
     return hashlib.sha256(text.encode()).hexdigest()
 
-def _get_steps_based_on_length(cipher_len, passwd_len) -> int:
-    return cipher_len // passwd_len
-
 def _convert_hex_to_list_of_ints(hex_string: str, length: int) -> list[int]:
     """
     This function will take a hexadecimal number (`hex_string`) that will be used to generate
     numbers as many as specified in `length` (length of the result list) parameter.
     """
     nums = []
-    cipher_len = len(hex_string)
-    steps = _get_steps_based_on_length(cipher_len, length)
-    for i in range(0, cipher_len, steps):
+    hex_str_len = len(hex_string)
+    steps = hex_str_len // length
+    for i in range(0, hex_str_len, steps):
         nums.append(int(hex_string[i::2], base=16))
     # `hex_string` might not be divisible by `length`, and
     # that results in longer `nums` than the given `length`
@@ -67,7 +64,7 @@ def turn_into_passwd(hex_string: str, length: int, passwd_chars: str) -> str:
     new_string = ""
     n_chars = len(passwd_chars)
     for num in nums:
-        new_string += passwd_chars[num%n_chars]
+        new_string += passwd_chars[num % n_chars]
     return new_string
 
 def generate_passwds(key: str, *args: str, lengths: tuple[int], passwd_chars: str) -> list[str]:

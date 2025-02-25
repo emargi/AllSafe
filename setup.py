@@ -7,7 +7,7 @@ with open("README.md", 'r', encoding="utf-8") as f:
     long_description = f.read()
 
 with open("requirements.txt", 'r', encoding="utf-8") as f:
-    required_packages = [l.strip() for l in f.readlines()]
+    required_packages = [line.strip() for line in f.readlines()]
 
 setup(
     name="AllSafe",

@@ -57,7 +57,7 @@ def get_passwd_score(passwd: str, passwd_len: int):
     # for every 2 characters over 8, +1 point is added
     # for every 2 characters fewer than 8, -1 point is
     # subtracted
-    score += (passwd_len-8) // 2
+    score += (passwd_len - 8) // 2
 
     return score
 
@@ -65,7 +65,7 @@ def get_meaningful_emoji(passwd_score: int):
     """
     Returns a meaningful emoji based on the password score.
 
-    The emoji reflects the strength of the password, with different 
+    The emoji reflects the strength of the password, with different
     emojis representing different score ranges.
     """
     if passwd_score < 4:

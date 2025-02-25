@@ -37,4 +37,5 @@ jobs:
         pytest
     - name: Lint with pylint
       run: |
+        # ignore docstring warnings
         pylint allsafe --disable=C0114,C0115,C0116 --exit-zero
