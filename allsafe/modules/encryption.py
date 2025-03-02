@@ -90,24 +90,6 @@ def generate_passwds(key: str, *args: str, lengths: tuple[int], passwd_chars: st
         passwd_chars (str):
             A string containing the characters from which the passwords
             will be constructed.
-
-    Returns:
-        list[str]:
-            A list of generated passwords. The length of the list will
-            correspond to the number of lengths spcified in the `lengths`
-            argument.
-
-    Example:
-        ```
-        from allsafe.modules import generate_passwd
-
-        # Should always return the same output
-        # for the same given data
-        passwds = generate_passwds(
-            "MySecret", "counter-strike", "fullserver",
-            lengths=(21,), passwd_chars="$-123@_abcdef",
-        )
-        ```
     """
     extra_strings = (arg.lower() for arg in args)
     char_list = sort_chars(*extra_strings)
