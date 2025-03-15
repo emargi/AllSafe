@@ -4,7 +4,7 @@ import argparse
 from allsafe.modules import ConsoleStream, generate_passwds, utils
 
 
-__version__ = "1.5.1"
+__version__ = "1.5.2"
 
 def print_passwds(console: ConsoleStream, passwds: list):
     for passwd in passwds:
