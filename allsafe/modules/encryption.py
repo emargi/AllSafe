@@ -41,7 +41,7 @@ def calculate_sha256(text: str) -> str:
     """Calculate the SHA-256 hash of the given text"""
     return hashlib.sha256(text.encode()).hexdigest()
 
-def _convert_hex_to_list_of_ints(hex_string: str, length: int) -> list[int]:
+def _convert_hex_to_list_of_ints(hex_string: str, length: int, select_steps: int) -> list[int]:
     """
     This function will take a hexadecimal number (`hex_string`) that will be used to generate
     numbers as many as specified in `length` (length of the result list) parameter.
@@ -50,21 +50,36 @@ def _convert_hex_to_list_of_ints(hex_string: str, length: int) -> list[int]:
     hex_str_len = len(hex_string)
     steps = hex_str_len // length
     for i in range(0, hex_str_len, steps):
-        nums.append(int(hex_string[i::2], base=16))
+        nums.append(int(hex_string[i::select_steps], base=16))
     # `hex_string` might not be divisible by `length`, and
     # that results in longer `nums` than the given `length`
     # this is a compatible option, for now.
     return nums[:length]
 
+def get_remainders(dividends: int, divisor: int) -> list[int]:
+    """
+    Get remainders of the divisions of `dividends` by the `divisor`
+    """
+    return [dividend % divisor for dividend in dividends]
+
 def turn_into_passwd(hex_string: str, length: int, passwd_chars: str) -> str:
     """
     Turn `hex_string` into a password with the given length and passwd_chars characters
     """
-    nums = _convert_hex_to_list_of_ints(hex_string, length)
-    new_string = ""
     n_chars = len(passwd_chars)
-    for num in nums:
-        new_string += passwd_chars[num % n_chars]
+    steps = 2
+    nums = _convert_hex_to_list_of_ints(hex_string, length, steps)
+    rems = get_remainders(nums, n_chars)
+    # this condition mostly happens in cases where
+    # passwd_chars has few amount of characters
+    if all(rem == rems[0] for rem in rems):
+        steps *= 2
+        nums = _convert_hex_to_list_of_ints(hex_string, length, steps)
+        rems = get_remainders(nums, n_chars)
+
+    new_string = ""
+    for rem in rems:
+        new_string += passwd_chars[rem]
     return new_string
 
 def generate_passwds(key: str, *args: str, lengths: tuple[int], passwd_chars: str) -> list[str]:
