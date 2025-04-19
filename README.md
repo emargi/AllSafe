@@ -44,11 +44,11 @@
 ## About The Project
 [![asciicast](https://asciinema.org/a/704458.svg)](https://asciinema.org/a/704458)
 
+> AllSafe is a terminal tool to generate unique password for each application or website you want to sign up in.
 
 > [!NOTE]
 > This tool will never store any of your data and does *NOT* need an internet connection. so you do not have to worry about your data-safety.
 
-> AllSafe is a terminal tool to generate unique password for each application or website you want to sign up in.
 
 AllSafe will give you a unique password for every app based on the given info, so everytime you pass the same info, you will get the same password
 
@@ -59,7 +59,7 @@ with having a unique password for each website, you will not need to worry about
 You don't, you just have to memorize your secret codes (safe enough to use one for all passwords). with the same secret code and the same data, you will get the same password. so no need to worry about storing or memorizing your passwords.
 
 ### How does the algorithm work?
-Your secret code will turn your data into some weird characters. the weird characters are encrypted into a hash. the algorithm gets rid of some keys in the hash. the incomplete hash is seperated into small parts based on the password length. each small part will be converted into a decimal number. each decimal number is divided by the length of the password characters, and a character will be chosen for the password based on the remainder.
+Your secret code will turn your data into some weird characters. the weird characters are encrypted into a hash. the algorithm gets rid of some keys in the hash. the incomplete hash is seperated into small parts based on the password length. each small part will be converted into a decimal number. each decimal number is divided by the number of usable characters, and a character will be chosen for the password based on the remainder.
 
 ### If my password gets exposed, will my secret code be revealed?
 No, even if they find a way to guess the hash, they will have the incomplete hash. although the complete hash is based on some weird characters.
